@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1978852928042420}
+  m_IsPrefabParent: 1
+--- !u!1 &1978852928042420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4203983741395498}
+  - component: {fileID: 114591686279672836}
+  m_Layer: 0
+  m_Name: EyeSee
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4203983741395498
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978852928042420}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114591686279672836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978852928042420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 787719efed1af4aab8cf229ce066a778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets: []
+  space: {x: 360, y: 180}
+  fov: 0
+  fovCustomSize: {x: 180, y: 90}
+  fovCustomShape: 1
+  roll: 0
+  pitch: 1
+  compressX: 0
+  compressY: 0
+  root: 2
+  outerSize: 0
+  outerSizeCustom: {x: 10, y: 10}
+  outerLineWidth: 0.06
+  outerLineColor: {r: 0, g: 0, b: 0, a: 1}
+  innerLineWidth: 0.06
+  innerLineColor: {r: 0, g: 0, b: 0, a: 1}
+  zerolineVertical: 1
+  zerolineHorizontal: 1
+  zerolineWidth: 0.06
+  zerolineColor: {r: 0, g: 0, b: 0, a: 1}
+  zerolineDotted: 1
+  helplineVertical: 45
+  helplineHorizontal: 45
+  helplineWidth: 0.06
+  helplineColor: {r: 0, g: 0, b: 0, a: 1}
+  proxySize: 5
+  proxyColor: {r: 0, g: 0, b: 1, a: 1}
+  distanceMin: 1
+  distanceMax: 10
+  distanceColor: 1
+  distanceMinColor: {r: 1, g: 0, b: 0, a: 1}
+  distanceMaxColor: {r: 0, g: 0, b: 1, a: 1}
+  distanceSize: 0
+  distanceMinSize: 1
+  distanceMaxSize: 10
