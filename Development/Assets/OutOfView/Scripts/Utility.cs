@@ -31,7 +31,7 @@ namespace Gruenefeld.OutOfView
 {
 	public class Utility
 	{
-		public const int DEFAULT_SEGMENTS = 64;
+		public const int DEFAULT_SEGMENTS = 128;
 		public const float DEFAULT_LINEWIDTH = 0.06f;
 
         #region GAMEOBJECT
@@ -257,7 +257,7 @@ namespace Gruenefeld.OutOfView
 
             lineRenderer.material = new Material(Shader.Find("Custom/Line"));
             lineRenderer.material.SetFloat("_Dotted", dotted ? 1 : 0);
-            lineRenderer.material.SetFloat("_Repeat", lineRenderer.positionCount);
+            lineRenderer.material.SetFloat("_Repeat", 64);
             lineRenderer.material.SetFloat("_Offset", 0);
             lineRenderer.material.renderQueue = 3000;
             lineRenderer.material.color = color;
@@ -326,7 +326,7 @@ namespace Gruenefeld.OutOfView
 
             lineRenderer.material = new Material(Shader.Find("Custom/Line"));
             lineRenderer.material.SetFloat("_Dotted", dotted ? 1 : 0);
-            lineRenderer.material.SetFloat("_Repeat", lineRenderer.positionCount);
+            lineRenderer.material.SetFloat("_Repeat", 64);
             lineRenderer.material.SetFloat("_Offset", 0);
             lineRenderer.material.renderQueue = 3000;
             lineRenderer.material.color = color;
@@ -367,7 +367,7 @@ namespace Gruenefeld.OutOfView
 
             lineRenderer.material = new Material(Shader.Find("Custom/Line"));
             lineRenderer.material.SetFloat("_Dotted", dotted ? 1 : 0);
-            lineRenderer.material.SetFloat("_Repeat", lineRenderer.positionCount);
+            lineRenderer.material.SetFloat("_Repeat", 32);
             lineRenderer.material.SetFloat("_Offset", 0);
             lineRenderer.material.renderQueue = 3000;
             lineRenderer.material.color = color;

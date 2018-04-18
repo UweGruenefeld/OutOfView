@@ -207,8 +207,8 @@ namespace Gruenefeld.OutOfView.EyeSee
             Vector2 innerBoundarySize = new Vector2();
             Vector2 degreeFOV = this.InnerFOV();
 
-            innerBoundarySize.x = (outerBoundarySize.x / 360) * degreeFOV.x;
-            innerBoundarySize.y = (outerBoundarySize.y / 180) * degreeFOV.y;
+            innerBoundarySize.x = (outerBoundarySize.x / this.eyesee.space.x) * degreeFOV.x;
+            innerBoundarySize.y = (outerBoundarySize.y / this.eyesee.space.y) * degreeFOV.y;
 
             // Portrait camera
             if (degreeFOV.x < degreeFOV.y)
