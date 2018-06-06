@@ -70,10 +70,16 @@ namespace Gruenefeld.OutOfView.EyeSee
 			Vector3 objectToCamera = matrix.inverse.MultiplyPoint(this.target.transform.position);
 
             // Theta = y-angle of object position
-            float theta = Mathf.Min(90, Vector3.Angle(objectToCamera, new Vector3(objectToCamera.x, 0, objectToCamera.z)));
+            float theta = Mathf.Min(90, Vector3.Angle(
+                new Vector3(0, objectToCamera.y, Mathf.Sqrt(Mathf.Pow(objectToCamera.x, 2) + Mathf.Pow(objectToCamera.z, 2))), 
+                new Vector3(0, 0, 1))
+            );
 
             // Phi = x-angle of object position
-            float phi = Mathf.Min(180, Vector3.Angle(objectToCamera, new Vector3(0, objectToCamera.y, 1)) * ((90 - theta) / 90f));
+            float phi = Mathf.Min(180, Vector3.Angle(
+                new Vector3(objectToCamera.x, 0, objectToCamera.z),
+                new Vector3(0, 0, 1))
+            ); // * Mathf.Cos(theta * Mathf.Deg2Rad));
 
             Vector2 position = new Vector2 (phi, theta);
 
@@ -82,6 +88,12 @@ namespace Gruenefeld.OutOfView.EyeSee
 				position.x *= -1;
 			if (objectToCamera.y < 0)
 				position.y *= -1;
+
+            // Special cases
+            if (objectToCamera.y == 0)
+                theta = 0;
+            if (objectToCamera.x == 0 && objectToCamera.z == 0)
+                phi = 0;
 
 			Vector2 outerBoundarySize = ((Area)this.technique.area).outerBoundarySize;
 
@@ -92,7 +104,7 @@ namespace Gruenefeld.OutOfView.EyeSee
             if (factorX > 1 || factorY > 1)
                 Utility.SetColorAttribute(this.proxy, new Color(0, 0, 0, 0));
 
-            position.x = Mathf.Min(position.x / this.eyesee.space.x, 1) * outerBoundarySize.x * 2;
+            position.x = Mathf.Min(position.x / this.eyesee.space.x, 1) * outerBoundarySize.x * Mathf.Cos(theta * Mathf.Deg2Rad) * 2;
             position.y = Mathf.Min(position.y / this.eyesee.space.y, 1) * outerBoundarySize.y * 2;
 
             // Calculate compression

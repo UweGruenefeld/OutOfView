@@ -1,12 +1,4 @@
-﻿// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
-
-// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
-
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-/*
+﻿/*
 * MIT License
 *
 * Copyright (c) 2018 Uwe Gruenefeld, Dag Ennenga
@@ -38,7 +30,8 @@ Shader "Custom/Line"
 		_Repeat("Repeat", float) = 5
 		_Spacing("Spacing", float) = 0.5
 	}
-		SubShader
+	
+	SubShader
 	{
 		Tags
 		{
@@ -74,7 +67,8 @@ Shader "Custom/Line"
 			{
 				float4 vertex : SV_POSITION;
 				float2 uv : TEXCOORD0;
-				float4 pos : TEXTCOORD1;
+				float4 pos : TEXCOORD1;
+				float4 obj : TEXCOORD2;
 				fixed4 color : COLOR0;
 			};
 
@@ -83,10 +77,10 @@ Shader "Custom/Line"
 				v2f o;
 				o.pos = v.vertex;
 				o.vertex = UnityObjectToClipPos(v.vertex);
+				o.obj = mul(UNITY_MATRIX_MV, v.vertex);
 				o.uv = v.uv;
 				o.uv.x = o.uv.x * _Repeat * (1.0f + _Spacing);
 				o.color = v.color;
-
 				return o;
 			}
 			
@@ -104,7 +98,7 @@ Shader "Custom/Line"
 
 				// Fix: Distance between visualization and camera is hard coded
 				// switch to use object space instead
-				if (_WorldSpaceCameraPos.z + 10 != i.pos.z)
+				if (i.obj.z + 10.12 < 0)
 					color.a = 0;
 
 				return color;
