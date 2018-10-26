@@ -53,7 +53,9 @@ namespace Gruenefeld.OutOfView.EyeSee
 			this.horizontalHelpLines = new Dictionary<int, GameObject>();
 
 			this.outerBoundarySize = this.OuterBoundarySize();
-			this.innerBoundarySize = this.InnerBoundarySize(this.outerBoundarySize);
+            this.innerBoundarySize = this.InnerBoundarySize(this.outerBoundarySize);
+
+            this.eyesee.ToLayer(this.area);
 		}
 			
 		public override void Update()
@@ -222,8 +224,11 @@ namespace Gruenefeld.OutOfView.EyeSee
 
         private void DrawInnerBoundary()
 		{
-			if (this.innerBoundary == null)
-				this.innerBoundary = Utility.GameObject ("InnerBoundary", Vector3.zero, this.area.transform);
+            if (this.innerBoundary == null)
+            {
+                this.innerBoundary = Utility.GameObject("InnerBoundary", Vector3.zero, this.area.transform);
+                this.eyesee.ToLayer(this.innerBoundary);
+            }
 
 			if (this.eyesee.fov == EnumFOV.Custom && this.eyesee.fovCustomShape == EnumShape.ELLIPSE)
 				Utility.AddEllipseLine (
@@ -251,7 +256,10 @@ namespace Gruenefeld.OutOfView.EyeSee
 		private void DrawOuterBoundary()
 		{
             if (this.outerBoundary == null)
+            {
                 this.outerBoundary = Utility.GameObject("OuterBoundary", Vector3.zero, this.area.transform);
+                this.eyesee.ToLayer(this.outerBoundary);
+            }
 
             Utility.AddEllipseLine(
                 this.outerBoundary, 
@@ -273,7 +281,10 @@ namespace Gruenefeld.OutOfView.EyeSee
                 return;
 
             if (this.verticalZeroline == null)
+            {
                 this.verticalZeroline = Utility.GameObject("VerticalZeroline", Vector3.zero, this.area.transform);
+                this.eyesee.ToLayer(this.verticalZeroline);
+            }
 
             Vector2 start = new Vector2(0, this.outerBoundarySize.y);
             Vector2 end = new Vector2(0, -this.outerBoundarySize.y);
@@ -297,7 +308,10 @@ namespace Gruenefeld.OutOfView.EyeSee
                 return;
 
             if (this.horizontalZeroline == null)
+            {
                 this.horizontalZeroline = Utility.GameObject("HorizontalZeroline", Vector3.zero, this.area.transform);
+                this.eyesee.ToLayer(this.horizontalZeroline);
+            }
 
             Vector2 start = new Vector2(this.outerBoundarySize.x, 0);
             Vector2 end = new Vector2(-this.outerBoundarySize.x, 0);
@@ -321,7 +335,10 @@ namespace Gruenefeld.OutOfView.EyeSee
 
         private void DrawVerticalHelplines()
 		{
-			int step = this.eyesee.helplineVertical;
+            if (!this.eyesee.helplineVertical)
+                return;
+
+			int step = this.eyesee.helplineVerticalStep;
 			int i = 1;
 
 			while (step < (this.eyesee.space.x / 2)) 
@@ -330,9 +347,10 @@ namespace Gruenefeld.OutOfView.EyeSee
                     this.verticalHelpLines.Add(i, Utility.GameObject("VerticalHelpline" + i, Vector3.zero, this.area.transform));
 
                 GameObject helpline = this.verticalHelpLines[i];
+                this.eyesee.ToLayer(helpline);
 
-				// Calculate size
-				float ratio = ((float)(this.eyesee.space.x / 2f) / step);
+                // Calculate size
+                float ratio = ((float)(this.eyesee.space.x / 2f) / step);
 				Vector2 size = outerBoundarySize;
 				size.x = (size.x / ratio);
 
@@ -347,15 +365,18 @@ namespace Gruenefeld.OutOfView.EyeSee
                     this.eyesee.helplineWidth
                 );
 
-                step += this.eyesee.helplineVertical;
+                step += this.eyesee.helplineVerticalStep;
 				i++;
 			}
 		}
 
 		private void DrawHorizontalHelplines()
 		{
+            if (!this.eyesee.helplineHorizontal)
+                return;
+
 			int i = 1;
-			int step = this.eyesee.helplineHorizontal;
+			int step = this.eyesee.helplineHorizontalStep;
 
 			while (step < this.eyesee.space.y / 2) 
 			{
@@ -363,6 +384,7 @@ namespace Gruenefeld.OutOfView.EyeSee
                     this.horizontalHelpLines.Add(i, Utility.GameObject("HorizontalHelpline" + i, Vector3.zero, this.area.transform));
 				
 				GameObject helpline = this.horizontalHelpLines [i];
+                this.eyesee.ToLayer(helpline);
 
                 // Calculate size
                 float ratio = (float)(this.eyesee.space.y / 2f) / step;
@@ -385,7 +407,7 @@ namespace Gruenefeld.OutOfView.EyeSee
                 );
 
                 if (i % 2 == 0)
-					step += this.eyesee.helplineHorizontal;
+					step += this.eyesee.helplineHorizontalStep;
 			
 				i++;
 			}

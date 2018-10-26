@@ -29,6 +29,7 @@ namespace Gruenefeld.OutOfView.EyeSee
 	public class Proxy : Core.Proxy
 	{
         private Technique eyesee;
+        private GameObject label;
 
 		public Proxy(Technique technique, GameObject target) : base(technique, target)
 		{
@@ -36,8 +37,69 @@ namespace Gruenefeld.OutOfView.EyeSee
 
 			Utility.AddCircleMesh (this.proxy);
 			base.proxy.transform.localRotation = Quaternion.Euler(0, 180, 0);
-		}
-			
+
+            this.label = new GameObject("Label");
+            this.label.transform.parent = base.proxy.transform;
+            this.label.transform.localPosition = this.eyesee.proxyLabelPosition;
+            this.label.transform.localRotation = Quaternion.Euler(
+                0 + this.eyesee.proxyLabelRotation.x,
+                180 + this.eyesee.proxyLabelRotation.y,
+                0 + this.eyesee.proxyLabelRotation.z
+            );
+            this.eyesee.ToLayer(this.label);
+
+            TextMesh textMesh = this.label.AddComponent<TextMesh>();
+            textMesh.richText = false;
+            textMesh.fontSize = 100;
+            textMesh.characterSize = this.eyesee.proxyLabelSize;
+            if(this.eyesee.proxyLabel)
+                textMesh.text = target.name;
+
+            base.proxy.GetComponent<MeshRenderer>().receiveShadows = false;
+            this.eyesee.ToLayer(this.proxy);
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+            if (this.proxy == null || !this.eyesee.proxyLabel)
+                return;
+
+            // Update label
+            Vector3 position = base.proxy.transform.localPosition;
+            TextMesh textMesh = this.label.GetComponent<TextMesh>();
+
+            if (eyesee.proxyLabelToCenter)
+            {
+                if (position.x >= 0 && position.y >= 0)
+                {
+                    textMesh.anchor = TextAnchor.UpperRight;
+                    textMesh.alignment = TextAlignment.Right;
+                }
+                else if (position.x < 0 && position.y >= 0)
+                {
+                    textMesh.anchor = TextAnchor.UpperLeft;
+                    textMesh.alignment = TextAlignment.Left;
+                }
+                else if (position.x >= 0 && position.y < 0)
+                {
+                    textMesh.anchor = TextAnchor.LowerRight;
+                    textMesh.alignment = TextAlignment.Right;
+                }
+                else
+                {
+                    textMesh.anchor = TextAnchor.LowerLeft;
+                    textMesh.alignment = TextAlignment.Left;
+                }
+            }
+            else
+            {
+                textMesh.anchor = TextAnchor.LowerRight;
+                textMesh.alignment = TextAlignment.Right;
+            }
+        }
+
 		protected override void UpdateColor()
 		{
 			if (!this.eyesee.distanceColor) 

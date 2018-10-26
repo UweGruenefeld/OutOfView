@@ -29,7 +29,7 @@ namespace Gruenefeld.OutOfView.EyeSee
 {
 	public class Technique : Core.Technique
 	{
-        [Header("General")]
+        [Header("Space")]
         public Vector2          space = new Vector2(360, 180);
 
         [Header("Field of view")]
@@ -40,6 +40,7 @@ namespace Gruenefeld.OutOfView.EyeSee
         [Header("Rotation")]
 		public bool             roll = false;
 		public bool             pitch = true;
+        public bool             yaw = false;
 
         [Header("Compression")]
 		public EnumCompression  compressX = EnumCompression.None;
@@ -48,41 +49,52 @@ namespace Gruenefeld.OutOfView.EyeSee
         public float            root = 2;
 
         [Header("Outer Area")]
+        public bool             outer = true;
 		public EnumFOV          outerSize = EnumFOV.Camera;
 		public Vector2          outerSizeCustom = new Vector2(10, 10);
-		public float            outerLineWidth = 0.06f;
-		public Color            outerLineColor = Color.black;
+		public float            outerLineWidth = 0.01f;
+		public Color            outerLineColor = Color.white;
 
         [Header("Inner Area")]
-        public float            innerLineWidth = 0.06f;
-        public Color            innerLineColor = Color.black;
+        public bool             inner = true;
+        public float            innerLineWidth = 0.01f;
+        public Color            innerLineColor = Color.white;
 
         [Header("Zeroline")]
 		public bool             zerolineVertical = true;
 		public bool             zerolineHorizontal = true;
-		public float            zerolineWidth = 0.06f;
-		public Color 			zerolineColor = Color.black;
+		public float            zerolineWidth = 0.01f;
+		public Color 			zerolineColor = Color.white;
         public bool             zerolineDotted = true;
 
         [Header("Helpline")]
-		public int 				helplineVertical = 45;
-		public int				helplineHorizontal = 45;
-		public float            helplineWidth = 0.06f;
-		public Color 			helplineColor = Color.black;
+        public bool             helplineVertical = true;
+		public int 				helplineVerticalStep = 45;
+        public bool             helplineHorizontal = true;
+		public int				helplineHorizontalStep = 45;
+		public float            helplineWidth = 0.01f;
+		public Color 			helplineColor = Color.white;
 
         [Header("Proxy")]
 		public float            proxySize = 5f;
-        public Color            proxyColor = Color.blue;
+        public Color            proxyColor = Color.white;
 
-        [Header("Distance")]
+        [Header("Proxy Distance")]
         public float            distanceMin = 1;
         public float            distanceMax = 10;
-        public bool             distanceColor = true;
-		public Color            distanceMinColor = Color.red;
+        public bool             distanceColor = false;
+        public Color            distanceMinColor = Color.red;
 		public Color            distanceMaxColor = Color.blue;
 		public bool             distanceSize = false;
 		public float            distanceMinSize = 1f;
 		public float            distanceMaxSize = 10f;
+
+        [Header("Proxy Label")]
+        public bool             proxyLabel = true;
+        public float            proxyLabelSize = 0.1f;
+        public bool             proxyLabelToCenter = true;
+        public Vector3          proxyLabelPosition = new Vector3(.1f, .1f, .1f);
+        public Vector3          proxyLabelRotation = new Vector3(0, 0, 0);
 
         public override void Start()
         {
@@ -90,6 +102,8 @@ namespace Gruenefeld.OutOfView.EyeSee
 
             this.gameObject.name = "EyeSee";
             this.area = new Area(this);
+
+            ToLayer(this.gameObject);
         }
 
         public override void Update()
@@ -102,6 +116,16 @@ namespace Gruenefeld.OutOfView.EyeSee
             }
 
             base.Update();
+        }
+
+        public void ToLayer(GameObject gameObject)
+        {
+            int layer = LayerMask.NameToLayer("EyeSee");
+
+            if (layer < 0)
+                return;
+
+            gameObject.layer = layer;
         }
     }
 }
