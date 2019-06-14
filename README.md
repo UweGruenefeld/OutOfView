@@ -7,3 +7,4 @@ Out-of-View Object Visualization Techniques for Mixed Reality.
 * **WedgeVR** (MobileHCI '18)
 * **HaloAR** (MobileHCI '18)
 * **WedgeAR** (MobileHCI '18)
+* **3DRadar** (IEEEVR '19)

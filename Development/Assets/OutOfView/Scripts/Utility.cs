@@ -230,8 +230,8 @@ namespace Gruenefeld.OutOfView
             GameObject gameObject,
             Vector2 size,
             Color color,
-            Func<Vector2, bool> hide,
-            Func<Vector2, Vector2> compress,
+            Func<Vector2, bool> hide = null,
+            Func<Vector2, Vector2> compress = null,
             bool dotted = false,
             float width = Utility.DEFAULT_LINEWIDTH, 
             int segments = Utility.DEFAULT_SEGMENTS)

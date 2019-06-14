@@ -1,0 +1,4 @@
+# Radar3D
+Current head-mounted displays (HMDs) have a limited field-of-view (FOV). A limited FOV further decreases the already restricted human visual range and amplifies the problem of objects receding from view (e.g., opponents in computer games). However, there is no previous work that investigates how to best perceive moving out-of-view objects on head-mounted displays. In this paper, we compare two visualization approaches: (1) Overview+detail, with 3D Radar, and (2) Focus+context, with EyeSee360, in a user study to evaluate their performances for visualizing moving out-of-view objects. We found that using 3D Radar resulted in a significantly lower movement estimation error and higher usability, measured by the system usability scale. 3D Radar was also preferred by 13 out of 15 participants for visualization of moving out-of-view objects.
+
+DOI: TBA

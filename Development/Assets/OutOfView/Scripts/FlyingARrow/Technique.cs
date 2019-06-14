@@ -29,21 +29,21 @@ namespace Gruenefeld.OutOfView.FlyingARrow
 	public class Technique : Core.Technique
 	{
         [Header("Movement")]
-        public float speed = 6.5f;
-        public bool repeated = true;
+        public float        speed = 6.5f;
+        public bool         repeated = true;
 
         [Header("Transform")]
-        public float distance = 1.0f;
-        public float height = 0.5f;
-        public float scale = 1.0f;
+        public float        distance = 1.0f;
+        public float        height = 0.5f;
+        public float        scale = 1.0f;
 
         [Header("Target")]
-        public float minDistance = 0.1f;
+        public float        minDistance = 0.1f;
 
         [Header("Sound")]
-        public AudioClip sound;
-        public bool spatial = false;
-        public float volume = 10.0f;
+        public AudioClip    sound;
+        public bool         spatial = false;
+        public float        volume = 10.0f;
 
         public override void Update()
         {

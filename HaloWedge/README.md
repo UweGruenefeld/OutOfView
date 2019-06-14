@@ -1,4 +1,4 @@
 # HaloWedge
 Head-mounted devices (HMDs) for Virtual and Augmented Reality (VR/AR) enable us to alter our visual perception of the world. However, current devices suffer from a limited field of view (FOV), which becomes problematic when users need to locate out of view objects (e.g., locating points-of-interest during sightseeing). To address this, we developed and evaluated in two studies HaloVR, WedgeVR, HaloAR and WedgeAR, which are inspired by usable 2D off-screen object visualization techniques (Halo, Wedge). While our techniques resulted in overall high usability, we found the choice of AR or VR impacts mean search time (VR: 2.25s, AR: 3.92s) and mean direction estimation error (VR:  21.85°, AR: 32.91°). Moreover, while adding more out-of-view objects significantly affects search time across VR and AR, direction estimation performance remains unaffected. We provide implications and discuss the challenges and opportunities of designing for VR and AR HMDs.
 
-DOI: TBA
+DOI: 10.1145/3229434.3229438
